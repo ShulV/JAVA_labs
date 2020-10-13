@@ -1,5 +1,5 @@
 /*
-Реализовать работу автомобиля на примере динамической структуры.
+Реализовать работу автомобиля на примере классов (ассоциация).
 Поля структуры:
 •	Название (строка)
 •	Цена (целое)
@@ -20,12 +20,12 @@ import java.util.Scanner;//консольный ввод
 public class Program{
 	public static void main(String[] args) {
 	
-	//System.out.println("Hi, Kate!");
 	Car bmw_x6 = new Car();
 	Engine bmw_engine = new Engine();
 	bmw_engine.init(0, 4395, 625, 8);
 	bmw_x6.init("BMW X6", 3500000, "BLACK", 0, 0, bmw_engine); //инициализируем поля объекта
 	bmw_x6.displayDataCar();
+	bmw_x6.readCarData();
 	bmw_x6.displayDataCar();
 	bmw_x6.startEngine(); //пытаемся завести двигатель
 	bmw_x6.displayDataCar();
