@@ -15,6 +15,41 @@ public class Program{
 
 
 class Engine{
+	int engineRPM; //количество оборотов в минуту
+	int capacity; //объем см куб
+	int enginePower; //мощность Л.С.
+	int quantityOfCylinders; //количество цилиндров
+
+	void init(int engineRPM, int capacity, int enginePower, int quantityOfCylinders){
+		this.engineRPM = engineRPM;
+		this.capacity = capacity;
+		this.enginePower = enginePower;
+		this.quantityOfCylinders = quantityOfCylinders;
+	}
+	void setEngineRPM(int engineRPM){
+		this.engineRPM = engineRPM;
+	}
+	void setCapacity(int capacity){
+		this.capacity = capacity;
+	}
+	void setEnginePower(int enginePower){
+		this.enginePower = enginePower;
+	}
+	void setQuantityOfCylinders(int quantityOfCylinders){
+		this.quantityOfCylinders = quantityOfCylinders;
+	}
+	int getEngineRPM(){
+		return this.engineRPM;	
+	}
+	int getCapacity(){
+		return this.capacity;
+	}
+	int getEnginePower(){
+		return this.enginePower;
+	}
+	int getQuantityOfCylinders(){
+		return this.quantityOfCylinders;
+	}
 	
 }
 
@@ -70,10 +105,11 @@ class Car {
 		System.out.println("\t\tSpeed:\t" + this.speed);
 	}
 	void addBenzine(int liters){
-	
+	System.out.println(liters + "lit. benzine added!");
+	this.benzine += liters;
 	}
 	void startEngine(){
-	
+		
 	}
 	void stopEngine(){
 	
