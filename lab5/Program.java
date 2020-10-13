@@ -50,39 +50,39 @@ public class Program{
 
 
 class Engine{
-	int engineRPM; //количество оборотов в минуту
-	int capacity; //объем см куб
-	int enginePower; //мощность Л.С.
-	int quantityOfCylinders; //количество цилиндров
+	private int engineRPM; //количество оборотов в минуту
+	private int capacity; //объем см куб
+	private int enginePower; //мощность Л.С.
+	private int quantityOfCylinders; //количество цилиндров
 
-	void init(int engineRPM, int capacity, int enginePower, int quantityOfCylinders){
+	public void init(int engineRPM, int capacity, int enginePower, int quantityOfCylinders){
 		this.engineRPM = engineRPM;
 		this.capacity = capacity;
 		this.enginePower = enginePower;
 		this.quantityOfCylinders = quantityOfCylinders;
 	}
-	void setEngineRPM(int engineRPM){
+	public void setEngineRPM(int engineRPM){
 		this.engineRPM = engineRPM;
 	}
-	void setCapacity(int capacity){
+	public void setCapacity(int capacity){
 		this.capacity = capacity;
 	}
-	void setEnginePower(int enginePower){
+	public void setEnginePower(int enginePower){
 		this.enginePower = enginePower;
 	}
-	void setQuantityOfCylinders(int quantityOfCylinders){
+	public void setQuantityOfCylinders(int quantityOfCylinders){
 		this.quantityOfCylinders = quantityOfCylinders;
 	}
-	int getEngineRPM(){
+	public int getEngineRPM(){
 		return this.engineRPM;	
 	}
-	int getCapacity(){
+	public int getCapacity(){
 		return this.capacity;
 	}
-	int getEnginePower(){
+	public int getEnginePower(){
 		return this.enginePower;
 	}
-	int getQuantityOfCylinders(){
+	public int getQuantityOfCylinders(){
 		return this.quantityOfCylinders;
 	}
 	
@@ -91,13 +91,13 @@ class Engine{
 class Car {
 	Scanner in = new Scanner(System.in);
 
-	String name;
-	int price;
-	String color;
-	int speed;
-	int benzine;
-	Engine engine;
-	void init(String name, int price, String color, int speed, int benzine, Engine engine){
+	private String name;
+	private int price;
+	private String color;
+	private int speed;
+	private int benzine;
+	private Engine engine;
+	public void init(String name, int price, String color, int speed, int benzine, Engine engine){
 		this.name = name;
 		this.price = price;
 		this.color = color;
@@ -106,7 +106,7 @@ class Car {
 		this.engine = engine;
 		System.out.println("Car initialized!");
 	}
-	void readCarData(){
+	public void readCarData(){
 		System.out.println("ENTER CAR DATA:");
 		
 		System.out.print("\tname:\t");
@@ -144,7 +144,7 @@ class Car {
 		this.benzine = in.nextInt();
 		in.nextLine();//очистка потока
 	}
-	void displayDataCar(){
+	public void displayDataCar(){
 		System.out.println("\n\tCAR DATA");
 		System.out.println("\t\tName:\t" + this.name);
 		System.out.println("\t\tPrice:\t" + this.price);
@@ -156,11 +156,11 @@ class Car {
 		System.out.println("\t\tBenzine:\t" + this.benzine);
 		System.out.println("\t\tSpeed:\t" + this.speed);
 	}
-	void addBenzine(int liters){
+	public void addBenzine(int liters){
 	System.out.println(liters + "lit. benzine added!");
 	this.benzine += liters;
 	}
-	void startEngine(){
+	public void startEngine(){
 		if (this.benzine > 0) {
 			this.engine.setEngineRPM(800);
 			System.out.println("Engine started!");
@@ -169,7 +169,7 @@ class Car {
 			System.out.println("No benzine. Engine didn't start!");
 		}
 	}
-	void stopEngine(){
+	public void stopEngine(){
 		if (this.engine.getEngineRPM() > 0) {
 			this.engine.setEngineRPM(0);
 			System.out.println("Engine stopped!");
@@ -178,7 +178,7 @@ class Car {
 			System.out.println("Engine stopped already!");
 		}
 	}
-	void addSpeed(int speed){
+	public void addSpeed(int speed){
 		if (this.engine.getEngineRPM() > 0) {
 			this.speed += speed;
 			System.out.println("Car speeded up!");
@@ -187,7 +187,7 @@ class Car {
 			System.out.println("Engine isn't starting. Car didn't speed up!");
 		}
 	}
-	void reduceSpeed(int speed){
+	public void reduceSpeed(int speed){
 		if (this.speed > 0) {
 			this.speed -= speed;
 			System.out.println("Car speeded down!");
