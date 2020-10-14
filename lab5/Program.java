@@ -16,9 +16,13 @@
 Х	ƒобавление скорости
 Х	”меньшить скорость
 */
+import java.io.*;// подключение библиотеки ввода-вывода на java
 import java.util.Scanner;//консольный ввод
 public class Program{
-	public static void main(String[] args) {
+	public static void main(String[] args){
+	try{
+	
+
 	
 	Car bmw_x6 = new Car();
 	Engine bmw_engine = new Engine();
@@ -45,6 +49,12 @@ public class Program{
 	bmw_x6.stopEngine(); //останавливаем двигатель
 	bmw_x6.displayDataCar();
 	}
+	catch(Exception е)
+	{
+	}
+
+	}
+
 }
 
 
@@ -88,9 +98,9 @@ class Engine{
 	
 }
 
-class Car {
-	Scanner in = new Scanner(System.in);
-
+class Car{
+	Scanner in = new Scanner(System.in, "Cp866");
+	//BufferedReader br = new BufferedReader(new InputStreamReader(System.in, "Cp866"));
 	private String name;
 	private int price;
 	private String color;
@@ -145,6 +155,15 @@ class Car {
 		in.nextLine();//очистка потока
 	}
 	public void displayDataCar(){
+		try{
+		// переключение вывода консоли на кодировку unicode
+		OutputStreamWriter os = new OutputStreamWriter (System.out,"Cp866");
+		// создание объекта Pr класса PrintWriter дл€ вывода на консоль
+		PrintWriter Pr = new PrintWriter (os, true);
+		//  начало консольной программы
+
+		//Pr.scanf("%s", &this.name);
+		Pr.printf("%s %s", "\t\t–усский:\t", this.name);
 		System.out.println("\n\tCAR DATA");
 		System.out.println("\t\tName:\t" + this.name);
 		System.out.println("\t\tPrice:\t" + this.price);
@@ -155,6 +174,11 @@ class Car {
 		System.out.println("\t\tQuanity of cylinders:\t" + this.engine.getQuantityOfCylinders());
 		System.out.println("\t\tBenzine:\t" + this.benzine);
 		System.out.println("\t\tSpeed:\t" + this.speed);
+		}
+		catch(Exception е) 
+		{
+		}
+
 	}
 	public void addBenzine(int liters){
 	System.out.println(liters + "lit. benzine added!");
