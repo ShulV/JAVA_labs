@@ -99,7 +99,7 @@ class Engine{
 }
 
 class Car{
-	Scanner in = new Scanner(System.in, "Cp866");
+	Scanner in = new Scanner(System.in/*, "Cp866"*/);
 	//BufferedReader br = new BufferedReader(new InputStreamReader(System.in, "Cp866"));
 	private String name;
 	private int price;
@@ -156,14 +156,6 @@ class Car{
 	}
 	public void displayDataCar(){
 		try{
-		// переключение вывода консоли на кодировку unicode
-		OutputStreamWriter os = new OutputStreamWriter (System.out,"Cp866");
-		// создание объекта Pr класса PrintWriter для вывода на консоль
-		PrintWriter Pr = new PrintWriter (os, true);
-		//  начало консольной программы
-
-		//Pr.scanf("%s", &this.name);
-		Pr.printf("%s %s", "\t\tРусский:\t", this.name);
 		System.out.println("\n\tCAR DATA");
 		System.out.println("\t\tName:\t" + this.name);
 		System.out.println("\t\tPrice:\t" + this.price);
