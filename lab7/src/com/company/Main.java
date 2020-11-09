@@ -24,6 +24,7 @@ public class Main {
 
     public static void main(String[] args) {
         try{
+            System.out.println("count=" + Car.getCount());
             Car[] car = new Car[3];//МАССИВ ОБЪЕКТОВ
             car[0] = new Car();
             Engine bmw_engine = new Engine();
@@ -33,8 +34,9 @@ public class Main {
             GasStation gasStation = new GasStation();
             //возврат целочисленного значения из метода через вспомогательный класс;
             int liters = gasStation.getCurrentBenzine(car[0]);
-            System.out.print("\tлитры:\t"+liters);
-
+            System.out.println("\tлитры:\t"+liters);
+            Car bmw = new Car();
+            System.out.println("После создания двух объектов count=" + Car.getCount());
         }
         catch(Exception е)
         {
@@ -96,7 +98,20 @@ class Car{
     private int speed;
     private int benzine;
     private Engine engine;
-    public void init(String name, int price, String color, int speed, int benzine, Engine engine){
+    private static int count;
+    public static int getCount(){
+        return count;
+    }
+    public Car(){
+
+            count++;
+
+    }
+    protected void finalize() // вызов при сборке мусора
+    {
+        count--;
+    }
+        public void init(String name, int price, String color, int speed, int benzine, Engine engine){
         this.name = name.toLowerCase();//ОБРАБОТКА СТРОК
         this.price = price;
         this.color = color.toLowerCase();//ОБРАБОТКА СТРОК
