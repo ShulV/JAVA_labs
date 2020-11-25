@@ -50,8 +50,26 @@ public class Main {
                     System.out.println("вызов исключения");
                 }
             }
+            if (choice.equals("9")){
+                System.out.println("конструктор 0 парам");
+                Car empty_car = new Car();//0 парам
+                empty_car.displayDataCar();
+                System.out.println("конструктор 1 парам");
+                Car some_car = new Car("lada");//один парам
+                some_car.displayDataCar();
+                System.out.println("конструктор все парам");
+                Engine engine1 = new Engine(0, 4395, 625, 8);
+                Car bmw = new Car("BMW X6", 3500000, "BLACK", 0, 0, engine1); //много парам
+                bmw.displayDataCar();
+                System.out.println("\tМассив объектов");
+                Car[] car = new Car[3];
+                for(int i=0; i < 3; i++)
+                {
+                    car[i] = new Car("car");
+                    car[i].displayDataCar();
+                }
 
-
+            }
         }
 
 
@@ -130,17 +148,35 @@ class Car{
     public static int getCount(){
         return count;
     }
-    public Car(){
-
-            count++;
-
-    }
     /*
     protected void finalize() // вызов при сборке мусора
     {
         count--;
     }
     */
+    //конструктор без парам
+    public Car(){
+        this.name = "";
+        this.price = 0;
+        this.color = "";
+        this.speed = 0;
+        this.benzine = 0;
+        this.engine = null;
+        count++;
+        System.out.println("Car initialized!");
+    }
+    //конструктор с 1 парам
+    public Car(String name){
+        this.name = name;
+        this.price = 0;
+        this.color = "";
+        this.speed = 0;
+        this.benzine = 0;
+        this.engine = null;
+        count++;
+        System.out.println("Car initialized!");
+    }
+    //конструктор со всеми парам
     public Car(String name, int price, String color, int speed, int benzine, Engine engine){
         this.name = name.toLowerCase();//ОБРАБОТКА СТРОК
         this.price = price;
@@ -148,6 +184,7 @@ class Car{
         this.speed = speed;
         this.benzine = benzine;
         this.engine = engine;
+        count++;
         System.out.println("Car initialized!");
     }
     public void readCarData(){
