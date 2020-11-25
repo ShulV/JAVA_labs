@@ -1,7 +1,7 @@
 package com.company;
-import java.io.*;// подключение библиотеки ввода-вывода на java
+//import java.io.*;// подключение библиотеки ввода-вывода на java
 import java.util.Scanner;//консольный ввод
-
+// lab work №7,8,9 Shulpov Victor PI-92
 /*
 Поля класса:
 •	Название (строка)
@@ -26,10 +26,8 @@ public class Main {
         try{
             System.out.println("count=" + Car.getCount());
             Car[] car = new Car[3];//МАССИВ ОБЪЕКТОВ
-            car[0] = new Car();
-            Engine bmw_engine = new Engine();
-            bmw_engine.init(0, 4395, 625, 8);
-            car[0].init("BMW X6", 3500000, "BLACK", 0, 22, bmw_engine); //инициализируем поля объекта
+            Engine bmw_engine = new Engine(0, 4395, 625, 8);
+            car[0] = new Car("BMW X6", 3500000, "BLACK", 0, 22, bmw_engine); //инициализируем поля объекта);
             car[0].displayDataCar();
             GasStation gasStation = new GasStation();
             //возврат целочисленного значения из метода через вспомогательный класс;
@@ -56,7 +54,22 @@ class Engine{
     private int enginePower; //мощность Л.С.
     private int quantityOfCylinders; //количество цилиндров
 
-    public void init(int engineRPM, int capacity, int enginePower, int quantityOfCylinders){
+    //конструктор без парам
+    public Engine(){
+        this.engineRPM = 0;
+        this.capacity = 0;
+        this.enginePower = 0;
+        this.quantityOfCylinders = 0;
+    }
+    //конструктор с 1 парам
+    public Engine(int engineRPM){
+        this.engineRPM = engineRPM;
+        this.capacity = 0;
+        this.enginePower = 0;
+        this.quantityOfCylinders = 0;
+    }
+    //конструктор со всеми парам
+    public Engine(int engineRPM, int capacity, int enginePower, int quantityOfCylinders){
         this.engineRPM = engineRPM;
         this.capacity = capacity;
         this.enginePower = enginePower;
@@ -107,11 +120,13 @@ class Car{
             count++;
 
     }
+    /*
     protected void finalize() // вызов при сборке мусора
     {
         count--;
     }
-        public void init(String name, int price, String color, int speed, int benzine, Engine engine){
+    */
+    public Car(String name, int price, String color, int speed, int benzine, Engine engine){
         this.name = name.toLowerCase();//ОБРАБОТКА СТРОК
         this.price = price;
         this.color = color.toLowerCase();//ОБРАБОТКА СТРОК
@@ -164,10 +179,10 @@ class Car{
             System.out.println("\t\tName:\t" + this.name);
             System.out.println("\t\tPrice:\t" + this.price);
             System.out.println("\t\tColor:\t" + this.color);
-            System.out.println("\t\tEngineRPM:\t" + this.engine.getEngineRPM());
-            System.out.println("\t\tCapacity:\t" + this.engine.getCapacity());
-            System.out.println("\t\tEngine Power:\t" + this.engine.getEnginePower());
-            System.out.println("\t\tQuanity of cylinders:\t" + this.engine.getQuantityOfCylinders());
+            //System.out.println("\t\tEngineRPM:\t" + this.engine.getEngineRPM());
+            //System.out.println("\t\tCapacity:\t" + this.engine.getCapacity());
+            //System.out.println("\t\tEngine Power:\t" + this.engine.getEnginePower());
+            //System.out.println("\t\tQuanity of cylinders:\t" + this.engine.getQuantityOfCylinders());
             System.out.println("\t\tBenzine:\t" + this.benzine);
             System.out.println("\t\tSpeed:\t" + this.speed);
         }
