@@ -23,23 +23,38 @@ import java.util.Scanner;//консольный ввод
 public class Main {
 
     public static void main(String[] args) {
-        try{
-            System.out.println("count=" + Car.getCount());
-            Car[] car = new Car[3];//МАССИВ ОБЪЕКТОВ
-            Engine bmw_engine = new Engine(0, 4395, 625, 8);
-            car[0] = new Car("BMW X6", 3500000, "BLACK", 0, 22, bmw_engine); //инициализируем поля объекта);
-            car[0].displayDataCar();
-            GasStation gasStation = new GasStation();
-            //возврат целочисленного значения из метода через вспомогательный класс;
-            int liters = gasStation.getCurrentBenzine(car[0]);
-            System.out.println("\tлитры:\t"+liters);
-            Car bmw = new Car();
-            System.out.println("После создания двух объектов count=" + Car.getCount());
+        String choice = "";
+        while(!choice.equals("0")){
+            System.out.println("Чтобы посмотреть\n\t8 лабу - введите 8\n\t9 лабу - введите 9\n\tвыйти - введите 0:\t");
+            Scanner in = new Scanner(System.in/*, "Cp866"*/);
+            choice = in.nextLine();
+            if (choice.equals("0")) {
+                break;
+            }
+            if (choice.equals("8")){
+                try{
+                    System.out.println("count=" + Car.getCount());
+                    Car[] car = new Car[3];//МАССИВ ОБЪЕКТОВ
+                    Engine bmw_engine = new Engine(0, 4395, 625, 8);
+                    car[0] = new Car("BMW X6", 3500000, "BLACK", 0, 22, bmw_engine); //инициализируем поля объекта);
+                    car[0].displayDataCar();
+                    GasStation gasStation = new GasStation();
+                    //возврат целочисленного значения из метода через вспомогательный класс;
+                    int liters = gasStation.getCurrentBenzine(car[0]);
+                    System.out.println("\tлитры:\t"+liters);
+                    Car bmw = new Car();
+                    System.out.println("После создания двух объектов count=" + Car.getCount());
+                }
+                catch(Exception е)
+                {
+                    System.out.println("вызов исключения");
+                }
+            }
+
+
         }
-        catch(Exception е)
-        {
-            System.out.println("вызов исключения");
-        }
+
+
     }
 }
 //ДОПОЛНИТЕЛЬНЫЙ КЛАСС
