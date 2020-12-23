@@ -36,7 +36,8 @@ public class Main {
         System.out.println(
                 "Показать лабу №:\n"+
                 "7-9 - введите 1\n" +
-                "10 - введите 2\n");
+                "10 - введите 2\n" +
+                "11 - введите 3\n");
         String choice = in.next();
         System.out.println(choice);
         switch (choice){
@@ -72,6 +73,32 @@ public class Main {
                     System.out.println(
                             "Поймали исключение Exception: слишком большая скорость!\n" +
                                     "ex.getMessage() = " + ex.getMessage());
+                }
+
+            }
+            case "3": {
+                final int N=3,M=4;
+                Car[] car = new Car[N];
+                ////////////////////////////
+                Car[][] d_car_array = new Car[N][];//зубчатый массив
+                for (int i = 0; i < N; i++)
+                {
+                    d_car_array[i] = new Car[i];
+                    for (int j = 0; j < i; j++) //матрица не прямоугольная
+                    {
+                        d_car_array[i][j] = new Car();
+                    }
+
+                }
+
+                for (int i = 0; i < N; i++)
+                {
+                    for (int j = 0; j < d_car_array[i].length; j++)
+                    {
+                        d_car_array[i][j] = new Car();
+                        System.out.print("Car[" + i + "][" + j + ']' + ' ');
+                    }
+                    System.out.println();
                 }
 
             }
