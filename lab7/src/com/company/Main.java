@@ -37,7 +37,8 @@ public class Main {
                 "Показать лабу №:\n"+
                 "7-9 - введите 1\n" +
                 "10 - введите 2\n" +
-                "11 - введите 3\n");
+                "11 - введите 3\n" +
+                "12 - введите 4\n");
         String choice = in.next();
         System.out.println(choice);
         switch (choice){
@@ -101,6 +102,10 @@ public class Main {
                     System.out.println();
                 }
 
+            }
+            case "4": {
+                TaxiCar taxi_car = new TaxiCar("Solaris");
+                taxi_car.displayDataCar();
             }
         }
 
@@ -185,7 +190,16 @@ class Car{
             count++;
 
     }
-
+    public Car(String name){
+        this.name = name.toLowerCase();//ОБРАБОТКА СТРОК
+        this.price = 0;
+        this.color = "";
+        this.speed =0;
+        this.benzine = 0;
+        this.engine = null;
+        this.max_speed = 0;
+        System.out.println("Car initialized!");
+    }
     public Car(String name, int price, String color, int speed, int benzine, Engine engine){
         this.name = name.toLowerCase();//ОБРАБОТКА СТРОК
         this.price = price;
@@ -302,6 +316,13 @@ class Car{
         else {
             System.out.println("Car is parking. Car didn't speed down!");
         }
+    }
+}
+
+//производный класс
+class TaxiCar extends Car{
+    public TaxiCar(String name){
+        super(name);
     }
 }
 
