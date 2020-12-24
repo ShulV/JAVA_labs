@@ -106,6 +106,7 @@ public class Main {
             case "4": {
                 TaxiCar taxi_car = new TaxiCar("Solaris");
                 taxi_car.displayDataCar();
+                taxi_car.callTaxi("Проспект ленина 119");
             }
         }
 
@@ -174,7 +175,7 @@ class Engine{
 class Car{
     Scanner in = new Scanner(System.in/*, "Cp866"*/);
     //BufferedReader br = new BufferedReader(new InputStreamReader(System.in, "Cp866"));
-    private String name;//тип String
+    protected String name;//тип String
     private int price;
     private String color;//тип StringB
     private int speed;
@@ -321,8 +322,12 @@ class Car{
 
 //производный класс
 class TaxiCar extends Car{
+    //вызов конструктора базового класса
     public TaxiCar(String name){
         super(name);
+    }
+    public void callTaxi(String address){
+        System.out.printf("По адресу %s приехала машина %s", address, this.name);
     }
 }
 
