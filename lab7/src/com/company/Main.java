@@ -107,6 +107,9 @@ public class Main {
                 TaxiCar taxi_car = new TaxiCar("Solaris");
                 taxi_car.displayDataCar();
                 taxi_car.callTaxi("Проспект ленина 119");
+                TaxiCar taxi_car2 = new TaxiCar("Solaris", 777);
+                taxi_car2.addBenzine(10,2);
+                taxi_car2.displayDataCar();
             }
         }
 
@@ -176,10 +179,10 @@ class Car{
     Scanner in = new Scanner(System.in/*, "Cp866"*/);
     //BufferedReader br = new BufferedReader(new InputStreamReader(System.in, "Cp866"));
     protected String name;//тип String
+    protected int benzine;
     private int price;
     private String color;//тип StringB
     private int speed;
-    private int benzine;
     private Engine engine;
     private int max_speed;
     private static int count;
@@ -268,7 +271,7 @@ class Car{
             //System.out.println("\t\tEngineRPM:\t" + this.engine.getEngineRPM());
             //System.out.println("\t\tCapacity:\t" + this.engine.getCapacity());
             //System.out.println("\t\tEngine Power:\t" + this.engine.getEnginePower());
-            //System.out.println("\t\tQuanity of cylinders:\t" + this.engine.getQuantityOfCylinders());
+            //System.out.println("\t\tQuantity of cylinders:\t" + this.engine.getQuantityOfCylinders());
             System.out.println("\t\tBenzine:\t" + this.benzine);
             System.out.println("\t\tSpeed:\t" + this.speed);
 
@@ -322,10 +325,24 @@ class Car{
 
 //производный класс
 class TaxiCar extends Car{
+    private int code_name;
     //вызов конструктора базового класса
     public TaxiCar(String name){
         super(name);
     }
+    //перегрузка метода базового класса (с вызовом базового класса)
+    public TaxiCar(String name, int code_name){
+        super(name);
+        this.code_name = code_name;
+    }
+
+    //перегрузка метода базового класса (без вызова базового класса)
+    public int addBenzine(int liters, int work_bonus){
+        System.out.println(liters + work_bonus + "lit. benzine added!");
+        this.benzine += liters + work_bonus;
+        return this.benzine;
+    }
+
     public void callTaxi(String address){
         System.out.printf("По адресу %s приехала машина %s", address, this.name);
     }
