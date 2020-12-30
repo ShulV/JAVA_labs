@@ -19,6 +19,24 @@ import java.util.Scanner;//консольный ввод
 •	Добавление скорости
 •	Уменьшить скорость
 */
+class Point {
+    public int x;
+    public int y;
+    Point(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+};
+abstract class Vehicle
+{
+    public int x;
+    public int y;
+    public Point getPosition()
+    {
+        return new Point(this.x, this.y);
+    }
+    abstract public void Move(int x, int y, int z);//абстрактный метод, который определяется в наследнике
+};
 
 class NegativeNumberException extends Exception{
     final private int number;
@@ -110,6 +128,9 @@ public class Main {
                 TaxiCar taxi_car2 = new TaxiCar("Solaris", 777);
                 taxi_car2.addBenzine(10,2);
                 taxi_car2.displayDataCar();
+                System.out.println("x=" + taxi_car2.x + " y=" + taxi_car2.y);
+                taxi_car2.Move(2000, 222, 0);
+                System.out.println("x=" + taxi_car2.x + " y=" + taxi_car2.y);
             }
         }
 
@@ -175,7 +196,7 @@ class Engine{
 
 }
 
-class Car{
+class Car extends Vehicle{
     Scanner in = new Scanner(System.in/*, "Cp866"*/);
     //BufferedReader br = new BufferedReader(new InputStreamReader(System.in, "Cp866"));
     protected String name;//тип String
@@ -320,6 +341,12 @@ class Car{
         else {
             System.out.println("Car is parking. Car didn't speed down!");
         }
+    }
+
+    @Override
+    public void Move(int x, int y, int z) {
+        this.x += x;
+        this.y += y;
     }
 }
 
