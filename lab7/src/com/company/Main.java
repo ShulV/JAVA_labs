@@ -49,7 +49,7 @@ class NegativeNumberException extends Exception{
 }
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CloneNotSupportedException {
         Scanner in = new Scanner(System.in/*, "Cp866"*/);
         System.out.println(
                 "Показать лабу №:\n"+
@@ -131,6 +131,48 @@ public class Main {
                 System.out.println("x=" + taxi_car2.x + " y=" + taxi_car2.y);
                 taxi_car2.Move(2000, 222, 0);
                 System.out.println("x=" + taxi_car2.x + " y=" + taxi_car2.y);
+                //интерфейс
+                System.out.println("\nИНТЕРФЕЙС\n");
+                taxi_car2.Beep();
+                IBeep i_taxi_vaz = new TaxiCar("ВАЗ");
+                i_taxi_vaz.Beep();
+                IBeep i_car_vaz = new Car("ВАЗ");
+                i_car_vaz.Beep();
+                Car car = new Car("car");
+                car.Beep();
+
+                //мелкое клонирование
+                System.out.println("\nКЛОНИРОВАНИЕ\n");
+                Engine engine1 = new Engine(0, 4395, 625, 8);
+                Car car1 = new Car("BMW X6", 3500000, "BLACK", 0, 0, engine1);
+                Engine engine2 = new Engine(0, 3395, 425, 4);
+                Car car2 = new Car("BMW X3", 1500000, "RED", 0, 0, engine2);
+                System.out.println("произвели мелкое клонирование");
+                car2 = (Car)car1.clone();
+                car2.displayDataCar();
+                System.out.println("Данные двигателя car2");
+                car2.engine.DisplayEngineData();
+                System.out.println("Установили для двигателя car1 EnginePower");
+                car1.engine.setEnginePower(100000000);
+                System.out.println("Данные двигателя car2 (при мелком клонировании не создали новый объект, который был полем класса)");
+                car2.engine.DisplayEngineData();
+                //глубокое клонирование
+                Engine _engine1 = new Engine(0, 4444, 444, 4);
+                TaxiCar _taxi_car1 = new TaxiCar("taxi 4", 4444444, "color 4", 0, 0, 444, _engine1);
+                Engine _engine2 = new Engine(0, 2222, 222, 2);
+                TaxiCar _taxi_car2 = new TaxiCar("taxi 2", 1500000, "color 2", 0, 0, 222, _engine2);
+                System.out.println("произвели глубокое клонирование");
+                _taxi_car2 = (TaxiCar)_taxi_car1.clone();
+                _taxi_car2.displayDataCar();
+                System.out.println("Данные двигателя _taxi_car2");
+                _taxi_car2.engine.DisplayEngineData();
+                System.out.println("Установили для двигателя _taxi_car2 EnginePower");
+                _taxi_car1.engine.setEnginePower(100000000);
+                System.out.println("Данные двигателя _taxi_car2 (при глубоком клонировании создали новый объект, который был полем класса)");
+                _taxi_car2.engine.DisplayEngineData();
+                System.out.println("Данные двигателя _taxi_car1");
+                _taxi_car1.engine.DisplayEngineData();
+
             }
         }
 
@@ -142,7 +184,7 @@ class GasStation{
         return car.addBenzine(0);
     }
 }
-class Engine{
+class Engine implements  Cloneable{
     private int engineRPM; //количество оборотов в минуту
     private int capacity; //объем см куб
     private int enginePower; //мощность Л.С.
@@ -193,19 +235,39 @@ class Engine{
     public int getQuantityOfCylinders(){
         return this.quantityOfCylinders;
     }
+    public void DisplayEngineData(){
+        System.out.println("\t\tEngineRPM:\t" + getEngineRPM());
+        System.out.println("\t\tCapacity:\t" + getCapacity());
+        System.out.println("\t\tEngine Power:\t" + getEnginePower());
+        System.out.println("\t\tQuantity of cylinders:\t" + getQuantityOfCylinders());
+    }
+    public Object clone() throws CloneNotSupportedException // перегрузка интерфейса клонирования
+    {
+        try
+        {
+            return (Engine)super.clone();
+        }
+        catch(CloneNotSupportedException e)
+        {
+
+        }
+        return this;
+    }
+
+
 
 }
 
-class Car extends Vehicle{
+class Car extends Vehicle implements IBeep, Cloneable{
     Scanner in = new Scanner(System.in/*, "Cp866"*/);
     //BufferedReader br = new BufferedReader(new InputStreamReader(System.in, "Cp866"));
     protected String name;//тип String
     protected int benzine;
-    private int price;
-    private String color;//тип StringB
-    private int speed;
-    private Engine engine;
-    private int max_speed;
+    protected int price;
+    protected String color;//тип StringB
+    protected int speed;
+    public Engine engine;
+    protected int max_speed;
     private static int count;
     public static int getCount(){
         return count;
@@ -342,11 +404,28 @@ class Car extends Vehicle{
             System.out.println("Car is parking. Car didn't speed down!");
         }
     }
-
+    public void Beep()
+    {
+        System.out.println("Default beep! (Car)");
+    }
     @Override
     public void Move(int x, int y, int z) {
         this.x += x;
         this.y += y;
+    }
+    public Object clone() throws CloneNotSupportedException
+    {
+        try
+        {
+            return (Car) super.clone();
+        }
+        catch(CloneNotSupportedException e)
+        {
+
+        }
+        return this;
+
+
     }
 }
 
@@ -362,7 +441,9 @@ class TaxiCar extends Car{
         super(name);
         this.code_name = code_name;
     }
-
+    public TaxiCar(String name, int price, String color, int speed, int benzine, int max_speed, Engine engine) {
+        super(name, price, color, speed, benzine, max_speed, engine);
+    }
     //перегрузка метода базового класса (без вызова базового класса)
     public int addBenzine(int liters, int work_bonus){
         System.out.println(liters + work_bonus + "lit. benzine added!");
@@ -373,5 +454,39 @@ class TaxiCar extends Car{
     public void callTaxi(String address){
         System.out.printf("По адресу %s приехала машина %s", address, this.name);
     }
+
+    public void Beep()
+    {
+        System.out.println("Default beep! (Taxi)");
+    }
+
+    public Object clone() throws CloneNotSupportedException
+    {
+        try
+        {
+            TaxiCar new_taxi_car=(TaxiCar) super.clone();
+            new_taxi_car.engine=(Engine)engine.clone();  // клонирование поля engine (Engine)) !
+
+            return new_taxi_car;
+        }
+        catch(CloneNotSupportedException e)
+        {
+            System.out.println();
+        }
+        return this;
+
+
+    }
+
 }
+
+//интерфейс гудка (подачи звукового сигнала)
+interface IBeep
+{
+    default void Beep()
+    {
+        System.out.println("Default beep!");
+    }
+}
+
 
